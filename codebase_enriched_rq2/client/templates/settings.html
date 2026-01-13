@@ -1,0 +1,431 @@
+<!-- Settings Page Content -->
+<div class="page-content">
+    <div class="settings-container">
+        <h2>⚙️ Settings</h2>
+        <p class="subtitle">Configure UART/Serial connection for ESP32 devices</p>
+
+        <div class="settings-grid">
+            <!-- UART Settings Card -->
+            <div class="settings-main">
+                <div class="settings-card">
+                    <div class="settings-card-header">
+                        <h5>🔌 UART Connection Settings</h5>
+                    </div>
+                    <div class="settings-card-body">
+                        <!-- Connection Status -->
+                        <div class="settings-alert" id="uart-status-alert" role="alert">
+                            <div class="alert-content">
+                                <div class="settings-spinner" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                                <span>Checking UART status...</span>
+                            </div>
+                        </div>
+
+                        <!-- Settings Form -->
+                        <form id="uart-settings-form">
+                            <!-- Serial Port Selection -->
+                            <div class="settings-field">
+                                <label for="uart-port-select" class="settings-label">Serial Port</label>
+                                <div class="settings-input-group">
+                                    <select class="settings-select" id="uart-port-select" required>
+                                        <option value="">-- Select Port --</option>
+                                    </select>
+                                    <button class="settings-btn settings-btn-secondary" type="button" id="refresh-ports-btn">
+                                        🔄 Refresh
+                                    </button>
+                                </div>
+                                <div class="settings-help">Select the serial port where ESP32 devices are connected</div>
+                            </div>
+
+                            <!-- Baud Rate Selection -->
+                            <div class="settings-field">
+                                <label for="uart-baudrate-select" class="settings-label">Baud Rate</label>
+                                <select class="settings-select" id="uart-baudrate-select" required>
+                                    <option value="9600">9600</option>
+                                    <option value="19200">19200</option>
+                                    <option value="38400">38400</option>
+                                    <option value="57600">57600</option>
+                                    <option value="115200" selected>115200</option>
+                                    <option value="230400">230400</option>
+                                    <option value="460800">460800</option>
+                                    <option value="921600">921600</option>
+                                </select>
+                                <div class="settings-help">Communication speed (default: 115200)</div>
+                            </div>
+
+                            <!-- Action Buttons -->
+                            <div class="settings-button-group">
+                                <button type="button" class="settings-btn settings-btn-success" id="uart-connect-btn">
+                                    🔌 Connect
+                                </button>
+                                <button type="button" class="settings-btn settings-btn-danger" id="uart-disconnect-btn" disabled>
+                                    🔌 Disconnect
+                                </button>
+                            </div>
+                            <div class="settings-help">
+                                ℹ️ Settings are automatically saved when you connect
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Debug Settings Card -->
+                <div class="settings-card">
+                    <div class="settings-card-header">
+                        <h5>🐛 Debug Message Settings</h5>
+                    </div>
+                    <div class="settings-card-body">
+                        <form id="debug-settings-form">
+                            <!-- Max Debug Messages -->
+                            <div class="settings-field">
+                                <label for="max-debug-messages-input" class="settings-label">Maximum Debug Messages per Device</label>
+                                <input
+                                    type="number"
+                                    class="settings-input"
+                                    id="max-debug-messages-input"
+                                    min="10"
+                                    max="10000"
+                                    step="10"
+                                    value="200"
+                                    required>
+                                <div class="settings-help">
+                                    Number of debug messages to keep in memory per device (10-10000). Older messages will be automatically deleted.
+                                </div>
+                            </div>
+
+                            <!-- Save Button -->
+                            <div class="settings-button-group">
+                                <button type="submit" class="settings-btn settings-btn-primary">
+                                    💾 Save Debug Settings
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Info Card -->
+                <div class="settings-card">
+                    <div class="settings-card-header">
+                        <h6>ℹ️ UART Connection Info</h6>
+                    </div>
+                    <div class="settings-card-body">
+                        <p>UART (Universal Asynchronous Receiver-Transmitter) allows communication with ESP32 devices over serial connection.</p>
+                        <ul>
+                            <li>Connect multiple ESP32 devices to a single serial port</li>
+                            <li>Each device must send messages with a <code>"device_id"</code> field in JSON format</li>
+                            <li>Example: <code>{"device_id": "esp32-001", "temperature": "25.5"}</code></li>
+                            <li>Messages are automatically routed to the correct device</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Status Card -->
+            <div class="settings-sidebar">
+                <div class="settings-card">
+                    <div class="settings-card-header">
+                        <h6>📊 Current Status</h6>
+                    </div>
+                    <div class="settings-card-body">
+                        <div class="status-item">
+                            <strong>Connection:</strong>
+                            <span id="status-connection" class="settings-badge settings-badge-secondary">Unknown</span>
+                        </div>
+                        <div class="status-item">
+                            <strong>Port:</strong>
+                            <span id="status-port" class="status-text">Not connected</span>
+                        </div>
+                        <div class="status-item">
+                            <strong>Baud Rate:</strong>
+                            <span id="status-baudrate" class="status-text">-</span>
+                        </div>
+                        <div class="status-item">
+                            <strong>Auto-Reconnect:</strong>
+                            <span id="status-autoconnect" class="settings-badge settings-badge-success">Enabled</span>
+                        </div>
+                        <div class="status-item status-item-last">
+                            <strong>Debug Limit:</strong>
+                            <span id="status-debug-limit" class="status-text">200</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<link rel="stylesheet" href="/styles/settings.css">
+
+<!-- Settings Page Script -->
+<script>
+// Initialize settings page
+async function initSettingsPage() {
+    console.log('Initializing settings page...');
+
+    // Load available ports
+    await refreshPorts();
+
+    // Load current settings
+    await loadSettings();
+
+    // Load current status
+    await loadStatus();
+
+    // Load debug settings
+    await loadDebugSettings();
+
+    // Set up event listeners
+    document.getElementById('refresh-ports-btn').addEventListener('click', refreshPorts);
+    document.getElementById('uart-connect-btn').addEventListener('click', connectUart);
+    document.getElementById('uart-disconnect-btn').addEventListener('click', disconnectUart);
+    document.getElementById('debug-settings-form').addEventListener('submit', saveDebugSettings);
+}
+
+// Load available serial ports
+async function refreshPorts() {
+    console.log('Refreshing available ports...');
+    const select = document.getElementById('uart-port-select');
+    const currentValue = select.value;
+
+    try {
+        const response = await fetch('/api/uart/ports');
+        const data = await response.json();
+
+        if (data.success) {
+            // Clear existing options except first
+            select.innerHTML = '<option value="">-- Select Port --</option>';
+
+            // Add available ports
+            data.ports.forEach(port => {
+                const option = document.createElement('option');
+                option.value = port;
+                option.textContent = port;
+                if (port === currentValue) {
+                    option.selected = true;
+                }
+                select.appendChild(option);
+            });
+
+            console.log(`Found ${data.ports.length} serial port(s)`);
+        }
+    } catch (error) {
+        console.error('Failed to load serial ports:', error);
+        showToast('Failed to load serial ports', 'error');
+    }
+}
+
+// Load current settings
+async function loadSettings() {
+    console.log('Loading UART settings...');
+
+    try {
+        const response = await fetch('/api/uart/settings');
+        const data = await response.json();
+
+        if (data.success) {
+            // Set form values
+            if (data.port) {
+                document.getElementById('uart-port-select').value = data.port;
+            }
+            document.getElementById('uart-baudrate-select').value = data.baudRate || 115200;
+
+            console.log('Settings loaded:', data);
+        }
+    } catch (error) {
+        console.error('Failed to load settings:', error);
+        showToast('Failed to load settings', 'error');
+    }
+}
+
+// Load current UART status
+async function loadStatus() {
+    console.log('Loading UART status...');
+
+    try {
+        const response = await fetch('/api/uart/status');
+        const data = await response.json();
+
+        if (data.success) {
+            updateStatusDisplay(data);
+        }
+    } catch (error) {
+        console.error('Failed to load status:', error);
+        showToast('Failed to load status', 'error');
+    }
+}
+
+// Update status display
+function updateStatusDisplay(status) {
+    const statusAlert = document.getElementById('uart-status-alert');
+    const connectBtn = document.getElementById('uart-connect-btn');
+    const disconnectBtn = document.getElementById('uart-disconnect-btn');
+
+    // Update connection badge
+    const connBadge = document.getElementById('status-connection');
+    const portSpan = document.getElementById('status-port');
+    const baudrateSpan = document.getElementById('status-baudrate');
+
+    if (status.connected) {
+        statusAlert.className = 'settings-alert settings-alert-success';
+        statusAlert.innerHTML = '<div class="alert-content">✅ UART connected: ' + status.port + '</div>';
+        connBadge.className = 'settings-badge settings-badge-success';
+        connBadge.textContent = 'Connected';
+        portSpan.textContent = status.port || 'Unknown';
+        baudrateSpan.textContent = status.baudRate || '-';
+
+        connectBtn.disabled = true;
+        disconnectBtn.disabled = false;
+    } else {
+        statusAlert.className = 'settings-alert settings-alert-warning';
+        statusAlert.innerHTML = '<div class="alert-content">⚠️ UART not connected</div>';
+        connBadge.className = 'settings-badge settings-badge-secondary';
+        connBadge.textContent = 'Disconnected';
+        portSpan.textContent = 'Not connected';
+        baudrateSpan.textContent = '-';
+
+        connectBtn.disabled = false;
+        disconnectBtn.disabled = true;
+    }
+
+}
+
+// Connect to UART
+async function connectUart() {
+    const port = document.getElementById('uart-port-select').value;
+    const baudRate = parseInt(document.getElementById('uart-baudrate-select').value);
+    const autoConnect = true; // Always auto-connect
+
+    if (!port) {
+        showToast('Please select a serial port', 'error');
+        return;
+    }
+
+    console.log(`Connecting to UART: ${port} @ ${baudRate} baud`);
+
+    try {
+        const response = await fetch('/api/uart/connect', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ port, baudRate, autoConnect })
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+            showToast('UART connected and settings saved', 'success');
+            await loadStatus();
+        } else {
+            showToast(data.message || 'Failed to connect', 'error');
+        }
+    } catch (error) {
+        console.error('Failed to connect UART:', error);
+        showToast('Failed to connect to UART', 'error');
+    }
+}
+
+// Disconnect from UART
+async function disconnectUart() {
+    console.log('Disconnecting UART...');
+
+    try {
+        const response = await fetch('/api/uart/disconnect', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' }
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+            showToast('UART disconnected', 'success');
+            await loadStatus();
+        } else {
+            showToast('Failed to disconnect', 'error');
+        }
+    } catch (error) {
+        console.error('Failed to disconnect UART:', error);
+        showToast('Failed to disconnect from UART', 'error');
+    }
+}
+
+// Load debug settings
+async function loadDebugSettings() {
+    console.log('Loading debug settings...');
+
+    try {
+        const response = await fetch('/api/debug/settings');
+        const data = await response.json();
+
+        if (data.success) {
+            document.getElementById('max-debug-messages-input').value = data.maxDebugMessages || 200;
+            document.getElementById('status-debug-limit').textContent = data.maxDebugMessages || 200;
+            console.log('Debug settings loaded:', data);
+        }
+    } catch (error) {
+        console.error('Failed to load debug settings:', error);
+        showToast('Failed to load debug settings', 'error');
+    }
+}
+
+// Save debug settings
+async function saveDebugSettings(event) {
+    event.preventDefault();
+
+    const maxDebugMessages = parseInt(document.getElementById('max-debug-messages-input').value);
+
+    if (maxDebugMessages < 10 || maxDebugMessages > 10000) {
+        showToast('Max debug messages must be between 10 and 10000', 'error');
+        return;
+    }
+
+    console.log(`Saving debug settings: maxDebugMessages=${maxDebugMessages}`);
+
+    try {
+        const response = await fetch('/api/debug/settings', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ maxDebugMessages })
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+            showToast('Debug settings saved successfully', 'success');
+            document.getElementById('status-debug-limit').textContent = maxDebugMessages;
+        } else {
+            showToast(data.message || 'Failed to save debug settings', 'error');
+        }
+    } catch (error) {
+        console.error('Failed to save debug settings:', error);
+        showToast('Failed to save debug settings', 'error');
+    }
+}
+
+// Show toast notification
+function showToast(message, type = 'info') {
+    console.log(`[${type.toUpperCase()}] ${message}`);
+
+    const alertClass = type === 'success' ? 'settings-toast-success' :
+                       type === 'error' ? 'settings-toast-danger' : 'settings-toast-info';
+
+    const alertDiv = document.createElement('div');
+    alertDiv.className = `settings-toast ${alertClass}`;
+    alertDiv.innerHTML = `
+        <span>${message}</span>
+        <button type="button" class="toast-close" onclick="this.parentElement.remove()">×</button>
+    `;
+
+    document.body.appendChild(alertDiv);
+
+    setTimeout(() => {
+        alertDiv.remove();
+    }, 3000);
+}
+
+// Initialize when page loads
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initSettingsPage);
+} else {
+    initSettingsPage();
+}
+</script>

@@ -1,0 +1,29 @@
+{
+  "name": "drawing-app-frontend",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "npm run clean && cargo run",
+    "dev": "concurrently --kill-others \"tsc --watch\" \"cargo watch -x run\"",
+    "dev-frontend": "tsc --watch",
+    "dev-backend": "cargo watch -x run",
+    "tsc": "tsc",
+    "clean": "taskkill /F /IM cargo.exe /T 2>nul & taskkill /F /IM drawing-app-backend.exe /T 2>nul & echo Processes cleaned",
+    "clean-force": "taskkill /F /IM cargo.exe /T 2>nul & taskkill /F /IM drawing-app-backend.exe /T 2>nul & taskkill /F /IM rustc.exe /T 2>nul & echo All Rust processes forcefully terminated",
+    "test": "node --test \"tests/**/*.js\"",
+    "test:esp32": "node --test \"tests/esp32_native_test.js\" \"tests/integration_test.js\"",
+    "test:rust": "cargo test",
+    "test:all": "npm run test:rust && npm run test"
+  },
+  "dependencies": {
+    "clean-css": "^5.3.3",
+    "node-fetch": "^3.3.2",
+    "terser": "^5.39.0",
+    "ws": "^8.18.3"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "fs-extra": "^11.3.1",
+    "typescript": "^5.0.0"
+  }
+}

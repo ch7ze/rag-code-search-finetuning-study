@@ -1,0 +1,128 @@
+{
+  "description": "RQ2 Deletion Experiment - Category 3 Questions",
+  "purpose": "Test training memory interference: deleted functions that both base and fine-tuned models found during RQ1",
+  "expected_behavior": {
+    "base_model": "Should report NOT_FOUND based on updated RAG retrieval (adapts to code changes)",
+    "finetuned_model": "May hallucinate deleted functions from training memory (training memory interference)"
+  },
+  "total_questions": 13,
+  "questions": [
+    {
+      "id": 1,
+      "question": "How do I create a JWT token for user authentication?",
+      "file_path": "codebase/src/backend/auth.rs",
+      "function_name": "create_jwt",
+      "line_number": 94,
+      "deleted": true,
+      "original_location": "codebase/src/backend/auth.rs:create_jwt"
+    },
+    {
+      "id": 2,
+      "question": "Where is the function to validate JWT tokens?",
+      "file_path": "codebase/src/backend/auth.rs",
+      "function_name": "validate_jwt",
+      "line_number": 130,
+      "deleted": true,
+      "original_location": "codebase/src/backend/auth.rs:validate_jwt"
+    },
+    {
+      "id": 5,
+      "question": "How do I load templates in the frontend?",
+      "file_path": "codebase/client/app.js",
+      "function_name": "loadTemplate",
+      "line_number": 73,
+      "deleted": true,
+      "original_location": "codebase/client/app.js:loadTemplate"
+    },
+    {
+      "id": 6,
+      "question": "Where is the device registration for WebSocket implemented?",
+      "file_path": "codebase/src/backend/websocket.rs",
+      "function_name": "handle_register_for_device",
+      "line_number": 313,
+      "deleted": true,
+      "original_location": "codebase/src/backend/websocket.rs:handle_register_for_device"
+    },
+    {
+      "id": 7,
+      "question": "How do I check if a user is authenticated in the frontend?",
+      "file_path": "codebase/client/app.js",
+      "function_name": "isAuthenticated",
+      "line_number": 109,
+      "deleted": true,
+      "original_location": "codebase/client/app.js:isAuthenticated"
+    },
+    {
+      "id": 10,
+      "question": "Where is the mDNS discovery service created?",
+      "file_path": "codebase/src/backend/mdns_discovery.rs",
+      "function_name": "create_mdns_discovery",
+      "line_number": 311,
+      "deleted": true,
+      "original_location": "codebase/src/backend/mdns_discovery.rs:create_mdns_discovery"
+    },
+    {
+      "id": 11,
+      "question": "How do I create an authentication cookie?",
+      "file_path": "codebase/src/backend/auth.rs",
+      "function_name": "create_auth_cookie",
+      "line_number": 162,
+      "deleted": true,
+      "original_location": "codebase/src/backend/auth.rs:create_auth_cookie"
+    },
+    {
+      "id": 58,
+      "question": "Where is the user color generation function?",
+      "file_path": "codebase/src/backend/device_store.rs",
+      "function_name": "generate_user_color",
+      "line_number": 318,
+      "deleted": true,
+      "original_location": "codebase/src/backend/device_store.rs:generate_user_color"
+    },
+    {
+      "id": 75,
+      "question": "How do I create the application router?",
+      "file_path": "codebase/src/backend/main.rs",
+      "function_name": "create_app",
+      "line_number": 295,
+      "deleted": true,
+      "original_location": "codebase/src/backend/main.rs:create_app"
+    },
+    {
+      "id": 77,
+      "question": "How do I handle user registration requests?",
+      "file_path": "codebase/src/backend/main.rs",
+      "function_name": "register_handler",
+      "line_number": 665,
+      "deleted": true,
+      "original_location": "codebase/src/backend/main.rs:register_handler"
+    },
+    {
+      "id": 78,
+      "question": "Where is the logout handler?",
+      "file_path": "codebase/src/backend/main.rs",
+      "function_name": "logout_handler",
+      "line_number": 723,
+      "deleted": true,
+      "original_location": "codebase/src/backend/main.rs:logout_handler"
+    },
+    {
+      "id": 87,
+      "question": "How do I disconnect UART via API?",
+      "file_path": "codebase/src/backend/main.rs",
+      "function_name": "uart_disconnect_handler",
+      "line_number": 1278,
+      "deleted": true,
+      "original_location": "codebase/src/backend/main.rs:uart_disconnect_handler"
+    },
+    {
+      "id": 91,
+      "question": "How do I list all users via API?",
+      "file_path": "codebase/src/backend/main.rs",
+      "function_name": "list_users_handler",
+      "line_number": 1450,
+      "deleted": true,
+      "original_location": "codebase/src/backend/main.rs:list_users_handler"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+# PyTorch (CUDA support required for GPU inference)
+torch>=2.1.0
+
+# Transformers & Acceleration
+transformers>=4.32.0
+accelerate>=0.25.0
+sentencepiece>=0.1.99
+
+# Fine-Tuning Dependencies (QLoRA)
+peft>=0.7.0  # Parameter-Efficient Fine-Tuning (LoRA)
+bitsandbytes>=0.41.0  # 4-bit quantization
+datasets>=2.14.0  # HuggingFace datasets for training
+scipy>=1.11.0  # Required for statistical tests
+
+# RAG Components
+chromadb
+sentence-transformers  # CodeBERT/GraphCodeBERT via SentenceTransformer; UniXcoder via native transformers (UniXcoderWrapper)
+tree-sitter-language-pack
+rank-bm25
+optimum  # For GPTQ model loading (native transformers support)

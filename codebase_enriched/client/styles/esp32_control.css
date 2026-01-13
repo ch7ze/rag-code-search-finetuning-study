@@ -1,0 +1,1389 @@
+/* ESP32-specific styling - Modern Design */
+
+/* Dynamic layout based on aspect ratio */
+.main-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Reduced from 20px to 10px */
+}
+
+/* Panel Resizer */
+.panel-resizer {
+    display: none; /* Hidden by default (only shown in landscape) */
+    width: 8px;
+    cursor: col-resize;
+    background: linear-gradient(90deg,
+        rgba(102, 126, 234, 0.1) 0%,
+        rgba(102, 126, 234, 0.3) 50%,
+        rgba(102, 126, 234, 0.1) 100%);
+    position: relative;
+    transition: background 0.2s ease;
+    flex-shrink: 0;
+}
+
+.panel-resizer:hover {
+    background: linear-gradient(90deg,
+        rgba(102, 126, 234, 0.2) 0%,
+        rgba(102, 126, 234, 0.5) 50%,
+        rgba(102, 126, 234, 0.2) 100%);
+}
+
+.panel-resizer::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 3px;
+    height: 40px;
+    background: rgba(102, 126, 234, 0.6);
+    border-radius: 2px;
+}
+
+.panel-resizer.resizing {
+    background: rgba(102, 126, 234, 0.4);
+}
+
+/* Landscape layout - left panel with everything except UDP, UDP on right */
+.main-container.landscape-layout {
+    flex-direction: row;
+    gap: 0; /* No gap - resizer provides spacing */
+    height: calc(100vh - 120px); /* Fixed container height */
+    overflow: hidden; /* Prevent main container from scrolling */
+    align-items: flex-start; /* Don't stretch, align to top */
+}
+
+.main-container.landscape-layout .panel-resizer {
+    display: block; /* Show resizer in landscape mode */
+}
+
+.main-container.landscape-layout .left-panel {
+    flex: 0 0 50%; /* Start at 50% width, can be resized */
+    min-width: 300px; /* Minimum width to prevent too small */
+    max-width: 80%; /* Maximum width to prevent too large */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: auto;
+    height: 100%;
+    padding-right: 10px;
+}
+
+.main-container.landscape-layout .right-panel {
+    flex: 1 1 auto; /* Take remaining space */
+    min-width: 300px; /* Minimum width to prevent too small */
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 120px);
+    min-height: 0;
+}
+
+.main-container.landscape-layout .udp-monitor-section {
+    height: 100%; /* Take full available height to span entire right side */
+    display: flex;
+    flex-direction: column;
+    /* Position UDP monitor to align with device controls and extend to variable monitor end */
+    align-self: stretch; /* Take full height of parent */
+    margin-top: 0; /* Align with start of device controls */
+}
+
+.main-container.landscape-layout .udp-monitor-section .monitor-area {
+    flex: 1; /* Take all remaining space */
+    min-height: 400px; /* Increased minimum height for more content */
+    height: auto; /* Override fixed height */
+    max-height: none; /* Override max-height to allow full expansion */
+    overflow-y: auto; /* Ensure scrolling works */
+    overflow-anchor: auto; /* Enable scroll anchoring for stable scrolling */
+    /* Improved layout for more content display */
+    line-height: 1.2; /* Tighter line spacing for more lines */
+    font-size: 0.8em; /* Slightly smaller font for more content */
+}
+
+.main-container.landscape-layout .variable-monitor-section .monitor-area {
+    height: auto; /* Allow natural height based on content */
+    max-height: 500px; /* Maximum height before scrolling */
+    overflow-y: auto; /* Ensure scrolling if content exceeds max-height */
+    overflow-anchor: auto;
+}
+
+/* Portrait layout for medium screens - UDP monitor on right like landscape, but variable monitor like narrow */
+.esp32-tabs .main-container.portrait-layout {
+    flex-direction: row;
+    gap: 15px; /* Reduced from 25px to 15px */
+    height: calc(100vh - 120px); /* Fixed height to enable proper scrolling */
+    overflow: hidden; /* Prevent main container from scrolling */
+    align-items: stretch; /* Stretch to full height */
+}
+
+.esp32-tabs .main-container.portrait-layout .left-panel {
+    flex: 1.2;
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Reduced from 15px to 10px */
+    overflow-y: auto; /* Scroll if content too tall */
+    min-height: 0; /* Allow proper flexbox shrinking */
+    height: 100%; /* Take full height of parent */
+}
+
+.esp32-tabs .main-container.portrait-layout .right-panel {
+    flex: 1.2;
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Take full height of parent */
+    min-height: 0; /* Allow proper flexbox shrinking */
+}
+
+.esp32-tabs .main-container.portrait-layout .udp-monitor-section {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+    margin-top: 0;
+}
+
+.esp32-tabs .main-container.portrait-layout .udp-monitor-section .monitor-area {
+    flex: 1;
+    min-height: 400px;
+    height: auto;
+    max-height: none;
+    overflow-y: auto;
+    overflow-anchor: auto;
+    line-height: 1.2;
+    font-size: 0.8em;
+}
+
+/* Variable monitor in portrait layout (medium screens) behaves like narrow/stack layout */
+.esp32-tabs .main-container.portrait-layout .variable-monitor-section .monitor-area {
+    height: auto; /* Allow natural height based on content */
+    max-height: 500px; /* Maximum height before scrolling */
+    overflow-y: auto;
+    overflow-anchor: auto;
+}
+
+
+/* Stack layout for very narrow screens - everything stacked vertically */
+.esp32-stack .main-container {
+    flex-direction: column;
+}
+
+.esp32-stack .main-container .left-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Reduced from 15px to 10px */
+}
+
+.esp32-stack .main-container .variable-monitor-section .monitor-area {
+    height: auto; /* Allow natural height based on content */
+    max-height: 500px; /* Maximum height before scrolling */
+    overflow-y: auto;
+    overflow-anchor: auto;
+}
+
+.esp32-stack .main-container .udp-monitor-section .monitor-area {
+    height: 400px;
+    max-height: 400px;
+    overflow-y: auto;
+    overflow-anchor: auto;
+}
+
+.esp32-device-card {
+    background: rgba(255, 255, 255, 0.95);
+    border: none;
+    border-radius: 20px;
+    margin-bottom: 25px;
+    min-height: 500px; /* Increased minimum height for proper display */
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    overflow: visible; /* Allow content to expand */
+    flex-shrink: 0; /* Prevent shrinking below min-height */
+}
+
+/* Ensure device card content doesn't get compressed in landscape layout */
+.main-container.landscape-layout .esp32-device-card {
+    min-height: 500px; /* Force minimum height */
+    height: auto; /* Allow natural height expansion */
+}
+
+/* Ensure tab content has proper height */
+.main-container.landscape-layout .tab-content {
+    min-height: 400px; /* Ensure tab content has minimum height */
+    height: auto; /* Allow natural expansion */
+}
+
+.esp32-device-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.esp32-device-header {
+    color: #333;
+    padding: 20px;
+    border-radius: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.esp32-device-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.esp32-device-header h5 {
+    margin: 0;
+    font-weight: 600;
+    font-size: 1.25rem;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.connection-status {
+    font-size: 0.9em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
+.status-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3);
+}
+
+.status-dot::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 6px;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+}
+
+.status-connected {
+    background-color: #28a745;
+    animation: pulse-green 2s infinite;
+    -webkit-animation: pulse-green 2s infinite;
+    -moz-animation: pulse-green 2s infinite;
+}
+.status-connecting {
+    background-color: #ffc107;
+    animation: pulse-yellow 2s infinite;
+    -webkit-animation: pulse-yellow 2s infinite;
+    -moz-animation: pulse-yellow 2s infinite;
+}
+.status-disconnected {
+    background-color: #dc3545;
+    animation: pulse-red 2s infinite;
+    -webkit-animation: pulse-red 2s infinite;
+    -moz-animation: pulse-red 2s infinite;
+}
+
+@keyframes pulse-green {
+    0% { box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.7), 0 0 0 2px rgba(255, 255, 255, 0.3); }
+    70% { box-shadow: 0 0 0 10px rgba(40, 167, 69, 0), 0 0 0 2px rgba(255, 255, 255, 0.3); }
+    100% { box-shadow: 0 0 0 0 rgba(40, 167, 69, 0), 0 0 0 2px rgba(255, 255, 255, 0.3); }
+}
+
+@-webkit-keyframes pulse-green {
+    0% { -webkit-box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.7), 0 0 0 2px rgba(255, 255, 255, 0.3); }
+    70% { -webkit-box-shadow: 0 0 0 10px rgba(40, 167, 69, 0), 0 0 0 2px rgba(255, 255, 255, 0.3); }
+    100% { -webkit-box-shadow: 0 0 0 0 rgba(40, 167, 69, 0), 0 0 0 2px rgba(255, 255, 255, 0.3); }
+}
+
+@keyframes pulse-yellow {
+    0% { box-shadow: 0 0 0 0 rgba(255, 193, 7, 0.7), 0 0 0 2px rgba(255, 255, 255, 0.3); }
+    70% { box-shadow: 0 0 0 10px rgba(255, 193, 7, 0), 0 0 0 2px rgba(255, 255, 255, 0.3); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 193, 7, 0), 0 0 0 2px rgba(255, 255, 255, 0.3); }
+}
+
+@keyframes pulse-red {
+    0% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.7), 0 0 0 2px rgba(255, 255, 255, 0.3); }
+    70% { box-shadow: 0 0 0 10px rgba(220, 53, 69, 0), 0 0 0 2px rgba(255, 255, 255, 0.3); }
+    100% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0), 0 0 0 2px rgba(255, 255, 255, 0.3); }
+}
+
+
+.variable-control {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
+    border: 2px solid rgba(102, 126, 234, 0.1);
+    border-radius: 15px;
+    padding: 8px 6px 6px 6px; /* Very compact: top, right, bottom, left */
+    margin-bottom: 0; /* Removed margin for more compact layout */
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0; /* Prevent shrinking */
+    min-height: auto; /* Allow natural height */
+}
+
+.variable-control::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+}
+
+.variable-control h6 {
+    color: #667eea;
+    font-weight: 600;
+    margin-bottom: 6px; /* Reduced from 8px to 6px */
+    display: flex;
+    align-items: center;
+    gap: 6px; /* Reduced gap */
+    font-size: 0.95rem; /* Slightly smaller header */
+}
+
+.variable-item {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 3px; /* Further reduced for maximum compactness */
+    margin-bottom: 3px; /* Minimal margin between items */
+    padding: 5px 6px; /* Very compact padding */
+    background: rgba(255, 255, 255, 0.6); /* Subtle background */
+    border-radius: 6px; /* Smaller radius */
+    border: 1px solid rgba(102, 126, 234, 0.15); /* Thinner, more subtle border */
+    transition: all 0.2s ease; /* Faster transition */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08); /* Very subtle shadow */
+}
+
+.variable-item:hover {
+    background: rgba(255, 255, 255, 0.8); /* Slightly stronger background on hover */
+    border-color: rgba(102, 126, 234, 0.3); /* Highlight border on hover */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12); /* Subtle shadow increase */
+    transform: none; /* No movement to save space */
+}
+
+.variable-name {
+    font-weight: 600;
+    color: #495057;
+    font-size: 0.9rem; /* Slightly smaller for compact layout */
+}
+
+.variable-input-row {
+    display: flex;
+    gap: 4px; /* Even smaller gap between input and button */
+    align-items: center;
+}
+
+.variable-input-row .form-control {
+    flex: 1; /* Input takes most space */
+    min-width: 0; /* Allow shrinking */
+}
+
+.variable-send-btn {
+    flex-shrink: 0; /* Button keeps size */
+    padding: 3px 6px; /* More compact button */
+    min-width: 28px; /* Smaller minimum button width */
+    font-size: 0.85rem; /* Smaller font for compact button */
+}
+
+.variable-value {
+    border-radius: 4px; /* Even smaller radius */
+    border: 1px solid rgba(102, 126, 234, 0.3); /* Thinner border */
+    transition: all 0.2s ease; /* Faster transition */
+    padding: 3px 6px; /* More compact padding */
+    font-size: 0.85rem; /* Smaller font for compactness */
+}
+
+.variable-value:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+    outline: none;
+}
+
+.start-options-area {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.08), rgba(118, 75, 162, 0.08));
+    border: 2px solid rgba(102, 126, 234, 0.15);
+    border-radius: 15px;
+    padding: 12px; /* Reduced from 20px to 12px */
+    margin-bottom: 0; /* Removed margin for more compact layout */
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0; /* Prevent shrinking */
+}
+
+/* Ensure start options area doesn't get compressed in landscape layout */
+.main-container.landscape-layout .start-options-area {
+    min-height: auto; /* Allow natural height */
+    flex-shrink: 0; /* Force no shrinking */
+}
+
+.start-options-area::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #28a745, #20c997);
+}
+
+.start-options-area h6 {
+    color: #28a745;
+    font-weight: 600;
+    margin-bottom: 8px; /* Reduced from 15px to 8px */
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Variable Monitor Section styling */
+.variable-monitor-section {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
+    border: 2px solid rgba(102, 126, 234, 0.1);
+    border-radius: 15px;
+    padding: 10px 12px; /* More padding on sides */
+    margin-bottom: 0; /* No margin for compact layout */
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.variable-monitor-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+}
+
+.variable-monitor-section h6 {
+    color: #667eea;
+    font-weight: 600;
+    margin-bottom: 6px; /* Reduced from 8px */
+    margin-top: 2px; /* Small top margin for spacing from gradient line */
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* UDP Monitor Section styling */
+.udp-monitor-section {
+    background: linear-gradient(135deg, rgba(40, 167, 69, 0.05), rgba(32, 201, 151, 0.05));
+    border: 2px solid rgba(40, 167, 69, 0.1);
+    border-radius: 15px;
+    padding: 0; /* No padding - monitor-area will handle it */
+    margin-bottom: 0; /* No margin for compact layout */
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.udp-monitor-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #28a745, #20c997);
+}
+
+.udp-monitor-section .monitor-area {
+    padding: 10px; /* Add padding to monitor area itself */
+    margin-top: 4px; /* Offset for the ::before gradient line */
+}
+
+/* Monitor Area Improvements - Full width, no border */
+.monitor-area {
+    background: transparent; /* Remove background */
+    border: none; /* Remove border */
+    border-radius: 0; /* Remove border radius */
+    padding: 0; /* No default padding - specific sections will add their own */
+    font-family: 'Courier New', monospace;
+    font-size: 0.85em; /* Slightly smaller font for more content */
+    line-height: 1.3; /* Tighter line spacing */
+    overflow-y: auto;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    word-break: break-word;
+    white-space: pre-wrap;
+    color: #333;
+    margin: 0;
+    flex: 1; /* Take available space in flex container */
+    min-height: 0; /* Allow shrinking */
+    box-sizing: border-box; /* Include padding in width calculation */
+}
+
+/* Variable monitor specific styling - don't expand, fit content */
+.variable-monitor-section .monitor-area {
+    flex: 0 0 auto; /* No grow, no shrink, auto size based on content */
+    padding: 0; /* No padding - items have their own */
+    display: flex;
+    flex-direction: column;
+    gap: 2px; /* Small gap between text entries */
+}
+
+/* Text variables container */
+.variable-monitor-section .monitor-area > div {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+/* Modern Button Styling */
+.btn {
+    border-radius: 10px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: none;
+    padding: 8px 16px; /* Reduced from 10px 20px to 8px 16px */
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.5s;
+}
+
+.btn:hover::before {
+    left: 100%;
+}
+
+.btn-success {
+    background: linear-gradient(135deg, #28a745, #20c997);
+    box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+}
+
+.btn-success:hover {
+    transform: translateY(-2px);
+    -webkit-transform: translateY(-2px);
+    -moz-transform: translateY(-2px);
+    -ms-transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+    -webkit-box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+    -moz-box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, #dc3545, #e83e8c);
+    box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
+}
+
+.btn-danger:hover {
+    transform: translateY(-2px);
+    -webkit-transform: translateY(-2px);
+    -moz-transform: translateY(-2px);
+    -ms-transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(220, 53, 69, 0.4);
+    -webkit-box-shadow: 0 6px 20px rgba(220, 53, 69, 0.4);
+    -moz-box-shadow: 0 6px 20px rgba(220, 53, 69, 0.4);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    -webkit-transform: translateY(-2px);
+    -moz-transform: translateY(-2px);
+    -ms-transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+    -webkit-box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+    -moz-box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.btn-outline-primary {
+    border: 2px solid #667eea;
+    color: #667eea;
+    background: transparent;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.2);
+}
+
+.btn-outline-primary:hover {
+    background: #667eea;
+    transform: translateY(-2px);
+    -webkit-transform: translateY(-2px);
+    -moz-transform: translateY(-2px);
+    -ms-transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(102, 126, 234, 0.3);
+    -webkit-box-shadow: 0 4px 16px rgba(102, 126, 234, 0.3);
+    -moz-box-shadow: 0 4px 16px rgba(102, 126, 234, 0.3);
+}
+
+/* Form Controls */
+.form-select, .form-control {
+    border-radius: 10px;
+    border: 2px solid rgba(102, 126, 234, 0.2);
+    transition: all 0.3s ease;
+    padding: 6px 12px; /* Reduced from 10px 15px to 6px 12px */
+}
+
+.form-select:focus, .form-control:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+    outline: none;
+}
+
+/* Tab Styling */
+.esp32-nav-tabs {
+    border: none;
+    border-radius: 15px 15px 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    list-style: none;
+    margin: 0;
+}
+
+.esp32-nav-tabs .nav-item {
+    list-style: none;
+}
+
+.esp32-nav-tabs .nav-link {
+    border: none;
+    color: #666;
+    font-weight: 500;
+    padding: 15px 25px;
+    transition: all 0.3s ease;
+    border-radius: 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    background: none;
+}
+
+.esp32-nav-tabs .nav-link .tab-clickable {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+}
+
+.esp32-nav-tabs .nav-link:hover {
+    color: #333;
+    background: rgba(102, 126, 234, 0.05);
+}
+
+.esp32-nav-tabs .nav-link.active {
+    color: #333;
+    background: white;
+    border-radius: 15px 15px 0 0;
+    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.esp32-tab-content {
+    border-radius: 0 0 15px 15px;
+    padding: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    background: white;
+}
+
+.tab-pane {
+    display: none;
+}
+
+.tab-pane.active {
+    display: block;
+}
+
+/* Alert Styling */
+.alert {
+    border-radius: 15px;
+    border: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.alert::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+}
+
+.alert-info {
+    background: linear-gradient(135deg, rgba(23, 162, 184, 0.9), rgba(32, 201, 151, 0.9));
+    color: white;
+}
+
+.alert-info::before {
+    background: linear-gradient(90deg, #17a2b8, #20c997);
+}
+
+.alert-warning {
+    background: linear-gradient(135deg, rgba(255, 193, 7, 0.9), rgba(253, 126, 20, 0.9));
+    color: white;
+}
+
+.alert-warning::before {
+    background: linear-gradient(90deg, #ffc107, #fd7e14);
+}
+
+.alert-danger {
+    background: linear-gradient(135deg, rgba(220, 53, 69, 0.9), rgba(232, 62, 140, 0.9));
+    color: white;
+}
+
+.alert-danger::before {
+    background: linear-gradient(90deg, #dc3545, #e83e8c);
+}
+
+/* Loading Spinner */
+.spinner-border {
+    width: 3rem;
+    height: 3rem;
+    border-width: 0.3em;
+}
+
+/* Checkbox Styling */
+.form-check-input {
+    border-radius: 6px;
+    border: 2px solid rgba(102, 126, 234, 0.3);
+    transition: all 0.3s ease;
+}
+
+.form-check-input:checked {
+    background-color: #667eea;
+    border-color: #667eea;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+}
+
+.form-check-input:focus {
+    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+}
+
+/* Page Background */
+.page-content {
+    min-height: 100vh;
+    padding: 20px 0;
+}
+
+/* Container */
+.esp32-container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Loading State */
+.esp32-loading-state {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    padding: 40px;
+    margin: 50px auto;
+    max-width: 400px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+.esp32-loading-state p {
+    margin-top: 16px;
+}
+
+/* Spinner */
+.esp32-spinner {
+    display: inline-block;
+    width: 3rem;
+    height: 3rem;
+    border: 0.3em solid rgba(102, 126, 234, 0.2);
+    border-top-color: #667eea;
+    border-radius: 50%;
+    animation: spinner-rotate 0.8s linear infinite;
+}
+
+@keyframes spinner-rotate {
+    to { transform: rotate(360deg); }
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* No Devices State */
+.esp32-no-devices {
+    text-align: center;
+    padding: 20px;
+}
+
+.esp32-info-box {
+    background: rgba(23, 162, 184, 0.1);
+    border: 2px solid rgba(23, 162, 184, 0.3);
+    border-radius: 15px;
+    padding: 30px;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.esp32-info-box h4 {
+    color: #17a2b8;
+    margin: 0 0 15px 0;
+}
+
+.esp32-info-box p {
+    color: #666;
+    margin: 0 0 20px 0;
+}
+
+/* Button Styles */
+.esp32-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.esp32-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.5s;
+}
+
+.esp32-btn:hover::before {
+    left: 100%;
+}
+
+.esp32-btn-primary {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.esp32-btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+/* Main Layout with Sidebar */
+.esp32-main-layout {
+    display: flex;
+    gap: 20px;
+    min-height: calc(100vh - 120px);
+    margin: 0 20px;
+}
+
+/* Sidebar Overlay */
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.sidebar-overlay.show {
+    display: block;
+    opacity: 1;
+}
+
+/* Mobile Sidebar Toggle Button */
+.mobile-sidebar-toggle {
+    display: none;
+    position: fixed;
+    left: 20px;
+    top: 90px;
+    z-index: 998;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    transition: all 0.3s ease;
+}
+
+.mobile-sidebar-toggle:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+}
+
+/* ESP32 Sidebar */
+.esp32-sidebar {
+    width: 280px;
+    flex-shrink: 0;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    overflow: hidden;
+    transition: transform 0.3s ease, width 0.3s ease;
+}
+
+.esp32-sidebar.collapsed {
+    width: 0;
+    transform: translateX(-100%);
+}
+
+.sidebar-header {
+    padding: 20px;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+    border-bottom: 2px solid rgba(102, 126, 234, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sidebar-header h6 {
+    margin: 0;
+    font-weight: 600;
+    color: #667eea;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-close-sidebar {
+    background: transparent;
+    border: none;
+    color: #667eea;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 5px;
+    transition: all 0.3s ease;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+}
+
+.btn-close-sidebar:hover {
+    color: #dc3545;
+    transform: scale(1.1);
+}
+
+/* Hide close button on desktop */
+@media (min-width: 1025px) {
+    .btn-close-sidebar {
+        display: none;
+    }
+}
+
+.sidebar-content {
+    padding: 15px;
+    max-height: calc(100vh - 220px);
+    overflow-y: auto;
+}
+
+.device-list-item {
+    padding: 12px 15px;
+    margin-bottom: 10px;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
+    border: 2px solid rgba(102, 126, 234, 0.1);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.device-list-item:hover {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.15), rgba(118, 75, 162, 0.15));
+    border-color: rgba(102, 126, 234, 0.3);
+    transform: translateX(5px);
+}
+
+.device-list-item.active {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.2));
+    border-color: #667eea;
+}
+
+.device-list-item .status-dot {
+    flex-shrink: 0;
+}
+
+.device-list-item .device-info {
+    flex: 1;
+}
+
+.device-list-item .device-name {
+    font-weight: 600;
+    color: #333;
+    font-size: 0.9rem;
+}
+
+.device-list-item .device-mac {
+    font-size: 0.75rem;
+    color: #666;
+    font-family: 'Courier New', monospace;
+}
+
+/* Content Area */
+.esp32-content-area {
+    flex: 1;
+    min-width: 0;
+}
+
+/* Layout Containers */
+.esp32-tabs {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.esp32-stack {
+    padding: 20px;
+}
+
+/* Tab Close Button */
+.tab-close-btn {
+    background: transparent;
+    border: none;
+    color: #999;
+    font-size: 1.4rem;
+    cursor: pointer;
+    padding: 0;
+    margin-left: auto;
+    line-height: 1;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.tab-close-btn:hover {
+    color: #dc3545;
+    transform: scale(1.2);
+}
+
+/* Responsive layout for narrow screens including folded phones */
+@media (max-width: 1024px) {
+    .mobile-sidebar-toggle {
+        display: block;
+    }
+
+    .esp32-sidebar {
+        position: fixed;
+        left: 0;
+        top: 80px;
+        height: calc(100vh - 80px);
+        z-index: 1000;
+        transform: translateX(-100%);
+    }
+
+    .esp32-sidebar.show {
+        transform: translateX(0);
+    }
+
+    .esp32-main-layout {
+        margin: 0 10px;
+    }
+
+    .esp32-content-area {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .esp32-device-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .device-users {
+        align-self: stretch;
+    }
+
+    .row .col-md-4 {
+        margin-bottom: 15px;
+    }
+
+    .esp32-main-layout {
+        flex-direction: column;
+    }
+
+    /* Stack layout for mobile */
+    #esp32-stack {
+        display: block;
+        padding: 10px;
+    }
+
+    #esp32-tabs {
+        display: none;
+    }
+}
+
+@media (min-width: 769px) {
+    #esp32-tabs {
+        display: block;
+    }
+    #esp32-stack {
+        display: none;
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .esp32-device-card {
+        background: rgba(33, 37, 41, 0.95);
+        color: #f8f9fa;
+    }
+
+    .start-options-area, .variable-control {
+        background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+    }
+
+    .variable-item {
+        background: rgba(52, 58, 64, 0.8);
+        color: #f8f9fa;
+    }
+
+    .tab-content {
+        background: #212529;
+        color: #f8f9fa;
+    }
+
+    .alert {
+        backdrop-filter: blur(10px);
+    }
+
+    /* Variable Monitor Dark Mode */
+    .variable-monitor-section {
+        background: linear-gradient(135deg, rgba(102, 126, 234, 0.15), rgba(118, 75, 162, 0.15));
+        border-color: rgba(102, 126, 234, 0.3);
+    }
+
+    .variable-monitor-section h6 {
+        color: #8b9aee;
+    }
+
+    .variable-text-entry {
+        color: #f8f9fa;
+        background: rgba(102, 126, 234, 0.08);
+    }
+
+    .monitor-area {
+        color: #f8f9fa;
+    }
+}
+
+.user-indicator {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-right: 8px;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.user-indicator:hover {
+    transform: scale(1.1);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+}
+
+.device-users {
+    font-size: 0.85em;
+    opacity: 0.95;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+/* Variable Monitor - Text Variables Section */
+.variable-text-entry {
+    margin-bottom: 2px;
+    padding: 2px 4px;
+    font-size: 0.85em;
+    color: #333;
+    background: rgba(102, 126, 234, 0.03);
+    border-radius: 3px;
+}
+
+/* Progress Bar Monitor Section */
+.progress-bar-monitor-section {
+    background: linear-gradient(135deg, rgba(40, 167, 69, 0.05), rgba(32, 201, 151, 0.05));
+    border: 2px solid rgba(40, 167, 69, 0.1);
+    border-radius: 15px;
+    padding: 10px 12px;
+    margin-bottom: 0;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.progress-bar-monitor-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #28a745, #20c997);
+}
+
+.progress-bar-monitor-section h6 {
+    color: #28a745;
+    font-weight: 600;
+    margin-bottom: 6px;
+    margin-top: 2px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.progress-bar-item {
+    margin-bottom: 8px;
+    padding: 8px;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 8px;
+    border: 1px solid rgba(40, 167, 69, 0.15);
+}
+
+.progress-bar-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.progress-bar-track {
+    flex: 1;
+    height: 28px;
+    background: rgba(40, 167, 69, 0.1);
+    border-radius: 14px;
+    position: relative;
+    border: 1px solid rgba(40, 167, 69, 0.2);
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #28a745, #20c997);
+    border-radius: 14px;
+    transition: width 0.3s ease;
+    box-shadow: 0 2px 4px rgba(40, 167, 69, 0.3);
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.progress-bar-values {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0 8px;
+    z-index: 1;
+}
+
+.progress-min,
+.progress-max,
+.progress-value {
+    color: #333;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 700;
+}
+
+.progress-bar-label {
+    font-weight: 600;
+    color: #495057;
+    font-size: 0.9rem;
+    min-width: 80px;
+    text-align: left;
+    flex-shrink: 0;
+}
+
+/* Dark mode for progress bars */
+@media (prefers-color-scheme: dark) {
+    .progress-bar-monitor-section {
+        background: linear-gradient(135deg, rgba(40, 167, 69, 0.15), rgba(32, 201, 151, 0.15));
+        border-color: rgba(40, 167, 69, 0.3);
+    }
+
+    .progress-bar-monitor-section h6 {
+        color: #4ecb71;
+    }
+
+    .progress-bar-item {
+        background: rgba(52, 58, 64, 0.8);
+        border-color: rgba(40, 167, 69, 0.3);
+    }
+
+    .progress-bar-label {
+        color: #f8f9fa;
+    }
+
+    .progress-bar-track {
+        background: rgba(40, 167, 69, 0.2);
+        border-color: rgba(40, 167, 69, 0.3);
+    }
+
+    .progress-min,
+    .progress-max,
+    .progress-value {
+        color: #f8f9fa;
+        background: rgba(0, 0, 0, 0.5);
+    }
+
+    .progress-bar-label {
+        color: #f8f9fa;
+    }
+}

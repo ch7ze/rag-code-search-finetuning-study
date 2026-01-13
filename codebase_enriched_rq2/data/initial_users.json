@@ -1,0 +1,40 @@
+{
+  "users": [
+    {
+      "email": "admin@drawing-app.local",
+      "display_name": "Administrator",
+      "password": "admin123",
+      "is_admin": true
+    },
+    {
+      "email": "user@drawing-app.local",
+      "display_name": "Test User",
+      "password": "user123",
+      "is_admin": false
+    },
+    {
+      "email": "moderator@drawing-app.local",
+      "display_name": "Moderator",
+      "password": "mod123",
+      "is_admin": false
+    },
+    {
+      "email": "demo@drawing-app.local",
+      "display_name": "Demo Account",
+      "password": "demo123",
+      "is_admin": false
+    },
+    {
+      "email": "guest@drawing-app.local",
+      "display_name": "Guest User",
+      "password": "guest123",
+      "is_admin": false
+    },
+    {
+      "email": "viewer@drawing-app.local",
+      "display_name": "Viewer",
+      "password": "view123",
+      "is_admin": false
+    }
+  ]
+}

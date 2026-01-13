@@ -1,0 +1,177 @@
+<div class="page-content">
+  
+  <p>Willkommen im ESP32 Manager! Hier können Sie Ihre ESP32 Geräte verwalten und überwachen.</p>
+  
+  <!-- ESP32 Discovery Section -->
+  <div class="esp32-discovery">
+    <h2>Entdeckte ESP32 Geräte</h2>
+    <div id="esp32-controls">
+      <button id="refresh-esp32-btn" class="action-button refresh-button">Geräte aktualisieren</button>
+    </div>
+    
+    <div id="esp32-list" class="esp32-grid">
+      <!-- ESP32 devices will be loaded dynamically -->
+      <div class="loading">Suche nach ESP32 Geräten...</div>
+    </div>
+  </div>
+
+  <!-- A 5.4: Canvas Management with Permissions -->
+  <div class="canvas-management">
+    <h2>Meine Zeichenflächen (A 5.4: Rechtesystem)</h2>
+    <div id="canvas-controls">
+      <button id="create-canvas-btn" class="action-button create-button">Neue Zeichenfläche erstellen</button>
+      <button id="refresh-canvas-btn" class="action-button refresh-button">Liste aktualisieren</button>
+    </div>
+    
+    <div id="canvas-list" class="canvas-grid">
+      <!-- Canvas werden hier dynamisch geladen -->
+      <div class="loading">Lade Zeichenflächen...</div>
+    </div>
+    
+    <!-- Create Canvas Modal -->
+    <div id="create-canvas-modal" class="modal" style="display:none;">
+      <div class="modal-content">
+        <h3>Neue Zeichenfläche erstellen</h3>
+        <input type="text" id="new-canvas-name" placeholder="Name der Zeichenfläche" maxlength="100">
+        <div class="modal-buttons">
+          <button id="confirm-create-canvas" class="action-button create-button">Erstellen</button>
+          <button id="cancel-create-canvas" class="action-button cancel-button">Abbrechen</button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Permission Management Modal -->
+    <div id="permission-modal" class="modal" style="display:none;">
+      <div class="modal-content permission-modal-content">
+        <h3>Manage Permissions</h3>
+        <div id="permission-modal-canvas-info" class="canvas-info">
+          <!-- Canvas info will be populated here -->
+        </div>
+        
+        <div class="permission-section">
+          <h4>Neue Berechtigung hinzufügen</h4>
+          <div class="user-search-section">
+            <input type="text" id="user-search-input" placeholder="Benutzer suchen (Email oder Name)..." autocomplete="off">
+            <div id="user-list-container" class="user-list-container">
+              <div id="user-list" class="user-list">
+                <div class="loading">Lade Benutzer...</div>
+              </div>
+            </div>
+          </div>
+          
+          <div id="permission-grant-section" class="permission-grant-section" style="display:none;">
+            <div class="selected-user">
+              <strong>Ausgewählter Benutzer:</strong> <span id="selected-user-display"></span>
+            </div>
+            <div class="permission-selector">
+              <label>Berechtigung:</label>
+              <select id="permission-select" class="enhanced-permission-select">
+                <option value="R">Read-Only - Nur Anzeigen</option>
+                <option value="W">Write - Zeichnen erlaubt</option>
+                <option value="V">Voice - Auch in moderierten Canvas</option>
+                <option value="M">Moderator - Moderation + Rechte vergeben</option>
+                <option value="O">Owner - Vollzugriff</option>
+              </select>
+              <div class="permission-explanation">
+                <span id="permission-explanation-text">Wählen Sie eine Berechtigung aus</span>
+              </div>
+            </div>
+            <div class="permission-actions">
+              <button id="grant-permission-btn" class="action-button create-button">Grant Permission</button>
+              <button id="cancel-grant-btn" class="action-button cancel-button">Abbrechen</button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="permission-section">
+          <h4>Bestehende Berechtigungen</h4>
+          <div id="existing-permissions" class="permissions-list">
+            <!-- Existing permissions will be populated here -->
+          </div>
+        </div>
+        
+        <div class="modal-buttons">
+          <button id="close-permission-modal" class="action-button cancel-button">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Edit Permission Modal -->
+    <div id="edit-permission-modal" class="modal" style="display:none;">
+      <div class="modal-content edit-permission-modal-content">
+        <h3>Berechtigung ändern</h3>
+        <div id="edit-permission-user-info" class="user-info-display">
+          <!-- User info will be populated here -->
+        </div>
+        
+        <div class="permission-change-section">
+          <div class="current-permission">
+            <label>Aktuelle Berechtigung:</label>
+            <div id="current-permission-display" class="permission-display">
+              <!-- Current permission will be shown here -->
+            </div>
+          </div>
+          
+          <div class="new-permission">
+            <label>Neue Berechtigung:</label>
+            <select id="edit-permission-select" class="enhanced-permission-select">
+              <option value="R">Read-Only - Nur Anzeigen</option>
+              <option value="W">Write - Zeichnen erlaubt</option>
+              <option value="V">Voice - Auch in moderierten Canvas</option>
+              <option value="M">Moderator - Moderation + Rechte vergeben</option>
+              <option value="O">Owner - Vollzugriff</option>
+            </select>
+            <div class="permission-explanation">
+              <span id="edit-permission-explanation-text">Wählen Sie eine neue Berechtigung aus</span>
+            </div>
+          </div>
+          
+          <div class="permission-change-warning" id="permission-change-warning" style="display:none;">
+            <div class="warning-content">
+              <span class="warning-icon">!</span>
+              <div class="warning-text">
+                <strong>Wichtiger Hinweis:</strong>
+                <span id="warning-message">Diese Änderung wird sofort wirksam</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="modal-buttons">
+          <button id="confirm-edit-permission" class="action-button create-button">Change Permission</button>
+          <button id="cancel-edit-permission" class="action-button cancel-button">Abbrechen</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Confirmation Dialog Modal -->
+    <div id="confirmation-modal" class="modal" style="display:none;">
+      <div class="modal-content confirmation-modal-content">
+        <div class="confirmation-header">
+          <span id="confirmation-icon" class="confirmation-icon">!</span>
+          <h3 id="confirmation-title">Aktion bestätigen</h3>
+        </div>
+        
+        <div class="confirmation-body">
+          <div id="confirmation-message" class="confirmation-message">
+            <!-- Confirmation message will be populated here -->
+          </div>
+          
+          <div id="confirmation-details" class="confirmation-details" style="display:none;">
+            <!-- Additional details will be populated here -->
+          </div>
+        </div>
+        
+        <div class="modal-buttons">
+          <button id="confirm-action" class="action-button delete-button">Bestätigen</button>
+          <button id="cancel-action" class="action-button cancel-button">Abbrechen</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<link rel="stylesheet" href="/styles/index.css">
+
+<script src="/scripts/index.js"></script>

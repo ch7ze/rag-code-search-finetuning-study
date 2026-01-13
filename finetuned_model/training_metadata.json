@@ -1,0 +1,12 @@
+{
+  "base_model": "deepseek-ai/deepseek-coder-6.7b-instruct",
+  "lora_rank": 16,
+  "lora_alpha": 32,
+  "learning_rate": 0.0002,
+  "num_epochs": 3,
+  "training_examples": 2052,
+  "validation_examples": 229,
+  "final_train_loss": 50.40800637255112,
+  "timestamp": "2025-11-15T16:10:28.741159",
+  "codebase_path": "./codebase"
+}

@@ -1,0 +1,34 @@
+<div class="page-content">
+    <h1>Drawer-Zeichenbereich</h1>
+    
+    <!-- User List Display -->
+    <div id="canvas-users-display" class="canvas-users">
+        <div class="users-header">Aktive Benutzer:</div>
+        <div id="users-list" class="users-list">
+            <span class="users-loading">Lade Benutzerliste...</span>
+        </div>
+    </div>
+    
+    <p>Wählen Sie auf der linken Seite Ihr Zeichwerkzeug aus.
+    Haben Sie eines ausgewählt, können Sie mit der Maus
+    die entsprechenden Figuren zeichen. Typischerweise, indem
+    Sie die Maus drücken, dann mit gedrückter Maustaste die
+    Form bestimmen, und dann anschließend die Maustaste loslassen.
+    </p>
+
+    <ul class="tools"></ul>
+    
+    
+    <canvas id="drawArea" width="1024" height="768"></canvas>
+    
+    <div id="info-section">
+        <div id="coordinates">Mausposition: <span id="mouse-position">---, ---</span></div>
+        <div id="debug-info" style="margin-top: 10px; font-size: 12px; color: #666;">
+            <div>Gespeicherte Shapes: <span id="saved-shapes-count">---</span></div>
+        </div>
+    </div>
+    <div id="shape-context-menu" class="context-menu" style="display:none; position:absolute;"></div>
+    
+</div>
+
+

@@ -1,0 +1,314 @@
+{
+  "category": 2,
+  "description": "Non-Existent Functionality - Queries for plausible but non-existent features to test hallucination resistance",
+  "questions": [
+    {
+      "id": 1,
+      "question": "Where is the OAuth2 integration implemented?",
+      "exists": false,
+      "rationale": "The system uses JWT authentication, not OAuth2. OAuth2 would be plausible for an IoT management system but is not implemented."
+    },
+    {
+      "id": 2,
+      "question": "How do I configure the Redis cache for device state?",
+      "exists": false,
+      "rationale": "The system uses SQLite persistence, not Redis. Redis would be plausible for caching but is not used."
+    },
+    {
+      "id": 3,
+      "question": "Where is the MQTT broker connection handler?",
+      "exists": false,
+      "rationale": "The system uses WebSocket communication and TCP connections to ESP32 devices, not MQTT. MQTT is common in IoT but not implemented here."
+    },
+    {
+      "id": 4,
+      "question": "How do I enable two-factor authentication for users?",
+      "exists": false,
+      "rationale": "The system has basic JWT authentication with username/password, but no 2FA implementation."
+    },
+    {
+      "id": 5,
+      "question": "Where is the device firmware update over-the-air (OTA) functionality?",
+      "exists": false,
+      "rationale": "OTA updates are typical for ESP32 IoT systems, making this plausible, but not implemented in this codebase."
+    },
+    {
+      "id": 6,
+      "question": "How do I configure the Prometheus metrics exporter?",
+      "exists": false,
+      "rationale": "No monitoring/metrics integration exists. Prometheus would be plausible for production IoT systems."
+    },
+    {
+      "id": 7,
+      "question": "Where is the GraphQL API endpoint defined?",
+      "exists": false,
+      "rationale": "The system uses REST API with Axum, not GraphQL. GraphQL would be a plausible alternative."
+    },
+    {
+      "id": 8,
+      "question": "How do I set up the Docker Compose configuration for multi-container deployment?",
+      "exists": false,
+      "rationale": "No Docker/containerization configuration exists in the codebase."
+    },
+    {
+      "id": 9,
+      "question": "Where is the rate limiting middleware implemented?",
+      "exists": false,
+      "rationale": "No rate limiting exists. This would be plausible for API protection."
+    },
+    {
+      "id": 10,
+      "question": "How do I configure the HTTPS/TLS certificate for the backend server?",
+      "exists": false,
+      "rationale": "No TLS/HTTPS configuration code exists. This would be essential for production."
+    },
+    {
+      "id": 11,
+      "question": "Where is the device telemetry data aggregation service?",
+      "exists": false,
+      "rationale": "The system stores events but has no dedicated aggregation/analytics service."
+    },
+    {
+      "id": 12,
+      "question": "How do I enable role-based access control (RBAC) for different user types?",
+      "exists": false,
+      "rationale": "The system has device permissions but no role-based user hierarchy."
+    },
+    {
+      "id": 13,
+      "question": "Where is the email notification service for device alerts?",
+      "exists": false,
+      "rationale": "No email/notification system exists. This would be plausible for alerting."
+    },
+    {
+      "id": 14,
+      "question": "How do I configure the PostgreSQL database connection pool?",
+      "exists": false,
+      "rationale": "The system uses SQLite, not PostgreSQL. PostgreSQL would be plausible for production."
+    },
+    {
+      "id": 15,
+      "question": "Where is the WebRTC video streaming implementation for device cameras?",
+      "exists": false,
+      "rationale": "No video streaming exists. WebRTC would be plausible for ESP32-CAM devices."
+    },
+    {
+      "id": 16,
+      "question": "How do I set up the Kubernetes deployment manifests?",
+      "exists": false,
+      "rationale": "No Kubernetes configuration exists in the codebase."
+    },
+    {
+      "id": 17,
+      "question": "Where is the device health check scheduler implemented?",
+      "exists": false,
+      "rationale": "There's a timeout monitor but no dedicated health check/ping scheduler."
+    },
+    {
+      "id": 18,
+      "question": "How do I configure the AWS S3 integration for device data backup?",
+      "exists": false,
+      "rationale": "No cloud storage integration exists. S3 would be plausible for backups."
+    },
+    {
+      "id": 19,
+      "question": "Where is the device group management functionality?",
+      "exists": false,
+      "rationale": "Devices are managed individually, no grouping/tagging functionality exists."
+    },
+    {
+      "id": 20,
+      "question": "How do I enable the audit logging for user actions?",
+      "exists": false,
+      "rationale": "No audit trail or comprehensive logging system for user actions exists."
+    },
+    {
+      "id": 21,
+      "question": "Where is the SAML single sign-on integration?",
+      "exists": false,
+      "rationale": "Only local JWT authentication exists, no SSO/SAML integration."
+    },
+    {
+      "id": 22,
+      "question": "How do I configure the CORS policy for cross-origin requests?",
+      "exists": false,
+      "rationale": "No explicit CORS configuration code exists in the backend."
+    },
+    {
+      "id": 23,
+      "question": "Where is the device configuration template system?",
+      "exists": false,
+      "rationale": "Devices are configured individually, no template system exists."
+    },
+    {
+      "id": 24,
+      "question": "How do I set up the influxDB time-series database for sensor data?",
+      "exists": false,
+      "rationale": "No time-series database integration. InfluxDB would be plausible for IoT metrics."
+    },
+    {
+      "id": 25,
+      "question": "Where is the device shadow state synchronization?",
+      "exists": false,
+      "rationale": "No AWS IoT-style device shadow implementation exists."
+    },
+    {
+      "id": 26,
+      "question": "How do I enable the API key authentication for third-party integrations?",
+      "exists": false,
+      "rationale": "Only JWT cookie authentication exists, no API key system."
+    },
+    {
+      "id": 27,
+      "question": "Where is the device provisioning workflow with QR code scanning?",
+      "exists": false,
+      "rationale": "Devices are added manually, no automated provisioning or QR code system."
+    },
+    {
+      "id": 28,
+      "question": "How do I configure the reverse proxy settings for Nginx?",
+      "exists": false,
+      "rationale": "No reverse proxy configuration exists in the codebase."
+    },
+    {
+      "id": 29,
+      "question": "Where is the device command queuing system for offline devices?",
+      "exists": false,
+      "rationale": "Commands are sent directly, no queuing for offline devices."
+    },
+    {
+      "id": 30,
+      "question": "How do I set up the ElasticSearch integration for log indexing?",
+      "exists": false,
+      "rationale": "No log aggregation/search system exists. ElasticSearch would be plausible."
+    },
+    {
+      "id": 31,
+      "question": "Where is the device geolocation tracking functionality?",
+      "exists": false,
+      "rationale": "No GPS/geolocation features exist for devices."
+    },
+    {
+      "id": 32,
+      "question": "How do I enable the WebSocket message compression?",
+      "exists": false,
+      "rationale": "WebSocket exists but no compression configuration is implemented."
+    },
+    {
+      "id": 33,
+      "question": "Where is the data retention policy scheduler?",
+      "exists": false,
+      "rationale": "Events are stored indefinitely, no automatic cleanup/retention policy."
+    },
+    {
+      "id": 34,
+      "question": "How do I configure the LDAP user directory integration?",
+      "exists": false,
+      "rationale": "Only local database users exist, no LDAP/Active Directory integration."
+    },
+    {
+      "id": 35,
+      "question": "Where is the device firmware version management system?",
+      "exists": false,
+      "rationale": "No firmware tracking or version management exists."
+    },
+    {
+      "id": 36,
+      "question": "How do I set up the scheduled device command execution (cron jobs)?",
+      "exists": false,
+      "rationale": "Commands are sent manually, no scheduling system exists."
+    },
+    {
+      "id": 37,
+      "question": "Where is the API request validation middleware using JSON Schema?",
+      "exists": false,
+      "rationale": "Basic validation exists in handlers but no formal JSON Schema validation."
+    },
+    {
+      "id": 38,
+      "question": "How do I configure the session storage with Memcached?",
+      "exists": false,
+      "rationale": "JWT tokens are used, no server-side session storage with Memcached."
+    },
+    {
+      "id": 39,
+      "question": "Where is the device batch operation functionality?",
+      "exists": false,
+      "rationale": "Devices are controlled individually, no batch operations exist."
+    },
+    {
+      "id": 40,
+      "question": "How do I enable the real-time device event streaming with Kafka?",
+      "exists": false,
+      "rationale": "Events are stored locally, no Kafka streaming integration exists."
+    },
+    {
+      "id": 41,
+      "question": "Where is the user session management with automatic timeout?",
+      "exists": false,
+      "rationale": "JWT tokens have expiration but no server-side session timeout management."
+    },
+    {
+      "id": 42,
+      "question": "How do I configure the load balancer for horizontal scaling?",
+      "exists": false,
+      "rationale": "Single instance application, no load balancing configuration."
+    },
+    {
+      "id": 43,
+      "question": "Where is the device certificate management for mutual TLS?",
+      "exists": false,
+      "rationale": "No certificate-based device authentication exists."
+    },
+    {
+      "id": 44,
+      "question": "How do I set up the automated database backup scheduler?",
+      "exists": false,
+      "rationale": "No automated backup system for the SQLite database."
+    },
+    {
+      "id": 45,
+      "question": "Where is the API versioning strategy implemented (v1, v2 endpoints)?",
+      "exists": false,
+      "rationale": "Single API version exists, no versioning strategy implemented."
+    },
+    {
+      "id": 46,
+      "question": "How do I enable the device analytics dashboard with real-time charts?",
+      "exists": false,
+      "rationale": "Basic event display exists but no analytics/dashboard with aggregations."
+    },
+    {
+      "id": 47,
+      "question": "Where is the user password reset email workflow?",
+      "exists": false,
+      "rationale": "Password can be updated but no email-based reset workflow exists."
+    },
+    {
+      "id": 48,
+      "question": "How do I configure the gRPC service for high-performance device communication?",
+      "exists": false,
+      "rationale": "REST API and WebSocket are used, no gRPC implementation."
+    },
+    {
+      "id": 49,
+      "question": "Where is the device error code translation/localization system?",
+      "exists": false,
+      "rationale": "No internationalization or error code mapping system exists."
+    },
+    {
+      "id": 50,
+      "question": "How do I set up the CI/CD pipeline with GitHub Actions?",
+      "exists": false,
+      "rationale": "No CI/CD configuration exists in the codebase."
+    }
+  ],
+  "metadata": {
+    "total_questions": 50,
+    "category_percentage": "30%",
+    "purpose": "Test hallucination resistance - model should respond 'not found' or 'does not exist' rather than providing fake file paths",
+    "codebase": "ESP32 IoT Device Management System (~16K LOC)",
+    "languages": ["Rust", "JavaScript", "HTML", "CSS"],
+    "evaluation_metric": "Hallucination Rate (percentage of queries where model provides specific file/line locations for non-existent features)"
+  }
+}

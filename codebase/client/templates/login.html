@@ -1,0 +1,35 @@
+<div class="page-content">
+    <nav class="auth-nav">
+        <a href="/" class="spa-link home-link">← Back to Home</a>
+        <a href="/debug" class="spa-link">Debug</a>
+    </nav>
+    
+    <div class="auth-container">
+        <h1>Login</h1>
+        <p>Bitte loggen Sie sich mit Ihrer Email und Ihrem Passwort ein.</p>
+        
+        <form id="login-form" class="auth-form" onsubmit="return false;">
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Passwort:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            
+            <button type="submit" class="auth-button">Einloggen</button>
+        </form>
+        
+        <div id="auth-message" class="auth-message" style="display: none;"></div>
+        
+        <div class="auth-links">
+            <p>Noch kein Account? <a href="/register" class="spa-link">Hier registrieren</a></p>
+        </div>
+    </div>
+</div>
+
+<link rel="stylesheet" href="/styles/auth.css">
+
+<script src="/scripts/login.js"></script>

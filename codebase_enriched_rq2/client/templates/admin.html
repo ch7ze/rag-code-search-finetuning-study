@@ -1,0 +1,57 @@
+<div class="page-content">
+    <nav class="auth-nav">
+        <a href="/" class="spa-link home-link">← Back to Home</a>
+        <a href="/debug" class="spa-link">Debug</a>
+    </nav>
+    
+    <div class="admin-container">
+        <h1>Administrator Area</h1>
+        <p>Here you can manage and view the user database.</p>
+        
+        <div id="admin-message" class="auth-message" style="display: none;"></div>
+        
+        <div class="admin-section">
+            <h2>Database Overview</h2>
+            <div class="stats-container">
+                <div class="stat-box">
+                    <span class="stat-number" id="total-users">-</span>
+                    <span class="stat-label">Benutzer gesamt</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number" id="admin-users">-</span>
+                    <span class="stat-label">Administratoren</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="admin-section">
+            <h2>User Management</h2>
+            <div class="user-controls">
+                <button id="refresh-users" class="admin-button">Refresh</button>
+                <input type="text" id="user-search" placeholder="Nach Benutzer suchen..." class="search-input">
+            </div>
+            
+            <div class="users-table-container">
+                <table id="users-table" class="users-table">
+                    <thead>
+                        <tr>
+                            <th>Anzeigename</th>
+                            <th>Admin</th>
+                            <th>Erstellt</th>
+                            <th>Aktionen</th>
+                        </tr>
+                    </thead>
+                    <tbody id="users-tbody">
+                        <tr>
+                            <td colspan="5" class="loading">Lade Benutzerdaten...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<link rel="stylesheet" href="/styles/admin.css">
+
+<script src="/scripts/admin.js"></script>

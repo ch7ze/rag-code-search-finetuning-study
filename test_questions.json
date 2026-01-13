@@ -1,0 +1,711 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "question": "How do I create a JWT token for user authentication?",
+      "file_path": "codebase/src/backend/auth.rs",
+      "function_name": "create_jwt",
+      "line_number": 94
+    },
+    {
+      "id": 2,
+      "question": "Where is the function to validate JWT tokens?",
+      "file_path": "codebase/src/backend/auth.rs",
+      "function_name": "validate_jwt",
+      "line_number": 130
+    },
+    {
+      "id": 3,
+      "question": "How do I hash passwords for new users?",
+      "file_path": "codebase/src/backend/database.rs",
+      "function_name": "new",
+      "line_number": 69,
+      "context": "DatabaseUser::new method"
+    },
+    {
+      "id": 4,
+      "question": "Where can I find the WebSocket message handler?",
+      "file_path": "codebase/src/backend/websocket.rs",
+      "function_name": "handle_client_message",
+      "line_number": 222
+    },
+    {
+      "id": 5,
+      "question": "How do I load templates in the frontend?",
+      "file_path": "codebase/client/app.js",
+      "function_name": "loadTemplate",
+      "line_number": 73
+    },
+    {
+      "id": 6,
+      "question": "Where is the device registration for WebSocket implemented?",
+      "file_path": "codebase/src/backend/websocket.rs",
+      "function_name": "handle_register_for_device",
+      "line_number": 313
+    },
+    {
+      "id": 7,
+      "question": "How do I check if a user is authenticated in the frontend?",
+      "file_path": "codebase/client/app.js",
+      "function_name": "isAuthenticated",
+      "line_number": 109
+    },
+    {
+      "id": 8,
+      "question": "Where is the ESP32 TCP connection manager implemented?",
+      "file_path": "codebase/src/backend/esp32_connection.rs",
+      "function_name": "new",
+      "line_number": 41,
+      "context": "Esp32Connection::new method"
+    },
+    {
+      "id": 9,
+      "question": "How do I send commands to an ESP32 device from the frontend?",
+      "file_path": "codebase/client/scripts/esp32_control.js",
+      "function_name": "sendStartOption",
+      "line_number": 1176
+    },
+    {
+      "id": 10,
+      "question": "Where is the mDNS discovery service created?",
+      "file_path": "codebase/src/backend/mdns_discovery.rs",
+      "function_name": "create_mdns_discovery",
+      "line_number": 311
+    },
+    {
+      "id": 11,
+      "question": "How do I create an authentication cookie?",
+      "file_path": "codebase/src/backend/auth.rs",
+      "function_name": "create_auth_cookie",
+      "line_number": 162
+    },
+    {
+      "id": 12,
+      "question": "Where is the logout cookie creation function?",
+      "file_path": "codebase/src/backend/auth.rs",
+      "function_name": "create_logout_cookie",
+      "line_number": 176
+    },
+    {
+      "id": 13,
+      "question": "How do I create a new user in the database?",
+      "file_path": "codebase/src/backend/database.rs",
+      "function_name": "create_user",
+      "line_number": 174
+    },
+    {
+      "id": 14,
+      "question": "Where is the user retrieval by username function?",
+      "file_path": "codebase/src/backend/database.rs",
+      "function_name": "get_user_by_username",
+      "line_number": 191
+    },
+    {
+      "id": 15,
+      "question": "How do I update a user's password?",
+      "file_path": "codebase/src/backend/database.rs",
+      "function_name": "update_user_password",
+      "line_number": 236
+    },
+    {
+      "id": 16,
+      "question": "Where is the user deletion function?",
+      "file_path": "codebase/src/backend/database.rs",
+      "function_name": "delete_user",
+      "line_number": 260
+    },
+    {
+      "id": 17,
+      "question": "How do I list all users from the database?",
+      "file_path": "codebase/src/backend/database.rs",
+      "function_name": "list_users",
+      "line_number": 212
+    },
+    {
+      "id": 18,
+      "question": "Where is the ESP32 device creation in database implemented?",
+      "file_path": "codebase/src/backend/database.rs",
+      "function_name": "create_esp32_device",
+      "line_number": 285
+    },
+    {
+      "id": 19,
+      "question": "How do I retrieve an ESP32 device by ID?",
+      "file_path": "codebase/src/backend/database.rs",
+      "function_name": "get_esp32_device",
+      "line_number": 309
+    },
+    {
+      "id": 20,
+      "question": "Where is the function to list all ESP32 devices?",
+      "file_path": "codebase/src/backend/database.rs",
+      "function_name": "list_esp32_devices",
+      "line_number": 326
+    },
+    {
+      "id": 21,
+      "question": "How do I update an ESP32 device in the database?",
+      "file_path": "codebase/src/backend/database.rs",
+      "function_name": "update_esp32_device",
+      "line_number": 348
+    },
+    {
+      "id": 22,
+      "question": "Where is the ESP32 device deletion function?",
+      "file_path": "codebase/src/backend/database.rs",
+      "function_name": "delete_esp32_device",
+      "line_number": 372
+    },
+    {
+      "id": 23,
+      "question": "How do I grant a user permission to access a device?",
+      "file_path": "codebase/src/backend/database.rs",
+      "function_name": "grant_device_permission",
+      "line_number": 398
+    },
+    {
+      "id": 24,
+      "question": "Where is the function to revoke device permissions?",
+      "file_path": "codebase/src/backend/database.rs",
+      "function_name": "revoke_device_permission",
+      "line_number": 422
+    },
+    {
+      "id": 25,
+      "question": "How do I check if a user has permission for a device?",
+      "file_path": "codebase/src/backend/database.rs",
+      "function_name": "has_device_permission",
+      "line_number": 446
+    },
+    {
+      "id": 26,
+      "question": "Where is the function to get all devices a user can access?",
+      "file_path": "codebase/src/backend/database.rs",
+      "function_name": "get_user_devices",
+      "line_number": 466
+    },
+    {
+      "id": 27,
+      "question": "How do I handle WebSocket connections?",
+      "file_path": "codebase/src/backend/websocket.rs",
+      "function_name": "websocket_handler",
+      "line_number": 75
+    },
+    {
+      "id": 28,
+      "question": "Where is the WebSocket connection cleanup implemented?",
+      "file_path": "codebase/src/backend/websocket.rs",
+      "function_name": "handle_websocket_connection",
+      "line_number": 117
+    },
+    {
+      "id": 29,
+      "question": "How do I broadcast messages to WebSocket clients?",
+      "file_path": "codebase/src/backend/websocket.rs",
+      "function_name": "broadcast_message",
+      "line_number": 424
+    },
+    {
+      "id": 30,
+      "question": "Where is the ESP32 manager creation implemented?",
+      "file_path": "codebase/src/backend/esp32_manager.rs",
+      "function_name": "new",
+      "line_number": 155,
+      "context": "Esp32Manager::new method"
+    },
+    {
+      "id": 31,
+      "question": "How do I add a device to the ESP32 manager?",
+      "file_path": "codebase/src/backend/esp32_manager.rs",
+      "function_name": "add_device",
+      "line_number": 195
+    },
+    {
+      "id": 32,
+      "question": "Where is the device removal function in ESP32 manager?",
+      "file_path": "codebase/src/backend/esp32_manager.rs",
+      "function_name": "remove_device",
+      "line_number": 329
+    },
+    {
+      "id": 33,
+      "question": "How do I connect to an ESP32 device?",
+      "file_path": "codebase/src/backend/esp32_manager.rs",
+      "function_name": "connect_device",
+      "line_number": 356
+    },
+    {
+      "id": 34,
+      "question": "Where is the ESP32 device disconnect function?",
+      "file_path": "codebase/src/backend/esp32_manager.rs",
+      "function_name": "disconnect_device",
+      "line_number": 452
+    },
+    {
+      "id": 35,
+      "question": "How do I send a command to an ESP32 device?",
+      "file_path": "codebase/src/backend/esp32_manager.rs",
+      "function_name": "send_command",
+      "line_number": 521
+    },
+    {
+      "id": 36,
+      "question": "Where is the unified message handler implemented?",
+      "file_path": "codebase/src/backend/esp32_manager.rs",
+      "function_name": "handle_message_unified",
+      "line_number": 638
+    },
+    {
+      "id": 37,
+      "question": "How do I get the connection status of all devices?",
+      "file_path": "codebase/src/backend/esp32_manager.rs",
+      "function_name": "get_all_connection_status",
+      "line_number": 915
+    },
+    {
+      "id": 38,
+      "question": "Where is the timeout monitor task started?",
+      "file_path": "codebase/src/backend/esp32_manager.rs",
+      "function_name": "start_unified_timeout_monitor",
+      "line_number": 949
+    },
+    {
+      "id": 39,
+      "question": "How do I start ESP32 discovery?",
+      "file_path": "codebase/src/backend/esp32_discovery.rs",
+      "function_name": "start_discovery",
+      "line_number": 63
+    },
+    {
+      "id": 40,
+      "question": "Where is the ESP32 discovery service created?",
+      "file_path": "codebase/src/backend/esp32_discovery.rs",
+      "function_name": "new",
+      "line_number": 39,
+      "context": "Esp32Discovery::new method"
+    },
+    {
+      "id": 41,
+      "question": "How do I stop ESP32 discovery?",
+      "file_path": "codebase/src/backend/esp32_discovery.rs",
+      "function_name": "stop_discovery",
+      "line_number": 207
+    },
+    {
+      "id": 42,
+      "question": "Where is the function to get discovered devices?",
+      "file_path": "codebase/src/backend/esp32_discovery.rs",
+      "function_name": "get_discovered_devices",
+      "line_number": 221
+    },
+    {
+      "id": 43,
+      "question": "How do I connect to a UART port?",
+      "file_path": "codebase/src/backend/uart_connection.rs",
+      "function_name": "connect",
+      "line_number": 76
+    },
+    {
+      "id": 44,
+      "question": "Where is the UART connection manager created?",
+      "file_path": "codebase/src/backend/uart_connection.rs",
+      "function_name": "new",
+      "line_number": 57,
+      "context": "UartConnection::new method"
+    },
+    {
+      "id": 45,
+      "question": "How do I disconnect from a UART port?",
+      "file_path": "codebase/src/backend/uart_connection.rs",
+      "function_name": "disconnect",
+      "line_number": 119
+    },
+    {
+      "id": 46,
+      "question": "Where is the UART message handler implemented?",
+      "file_path": "codebase/src/backend/uart_connection.rs",
+      "function_name": "handle_uart_message",
+      "line_number": 267
+    },
+    {
+      "id": 47,
+      "question": "How do I send a command via UART?",
+      "file_path": "codebase/src/backend/uart_connection.rs",
+      "function_name": "send_command",
+      "line_number": 345
+    },
+    {
+      "id": 48,
+      "question": "Where is the function to list available UART ports?",
+      "file_path": "codebase/src/backend/uart_connection.rs",
+      "function_name": "list_ports",
+      "line_number": 394
+    },
+    {
+      "id": 49,
+      "question": "How do I check UART connection status?",
+      "file_path": "codebase/src/backend/uart_connection.rs",
+      "function_name": "is_connected",
+      "line_number": 143
+    },
+    {
+      "id": 50,
+      "question": "Where is the UART listener task started?",
+      "file_path": "codebase/src/backend/uart_connection.rs",
+      "function_name": "start_uart_listener_task",
+      "line_number": 153
+    },
+    {
+      "id": 51,
+      "question": "How do I create a device event store?",
+      "file_path": "codebase/src/backend/device_store.rs",
+      "function_name": "new",
+      "line_number": 98,
+      "context": "DeviceEventStore::new method"
+    },
+    {
+      "id": 52,
+      "question": "Where is the event addition function in device store?",
+      "file_path": "codebase/src/backend/device_store.rs",
+      "function_name": "add_event",
+      "line_number": 125
+    },
+    {
+      "id": 53,
+      "question": "How do I broadcast an event to all clients?",
+      "file_path": "codebase/src/backend/device_store.rs",
+      "function_name": "broadcast_event",
+      "line_number": 159
+    },
+    {
+      "id": 54,
+      "question": "Where is the function to get events for a device?",
+      "file_path": "codebase/src/backend/device_store.rs",
+      "function_name": "get_events",
+      "line_number": 214
+    },
+    {
+      "id": 55,
+      "question": "How do I register a WebSocket client connection?",
+      "file_path": "codebase/src/backend/device_store.rs",
+      "function_name": "register_client",
+      "line_number": 246
+    },
+    {
+      "id": 56,
+      "question": "Where is the client unregistration function?",
+      "file_path": "codebase/src/backend/device_store.rs",
+      "function_name": "unregister_client",
+      "line_number": 279
+    },
+    {
+      "id": 57,
+      "question": "How do I get all active clients?",
+      "file_path": "codebase/src/backend/device_store.rs",
+      "function_name": "get_all_clients",
+      "line_number": 293
+    },
+    {
+      "id": 58,
+      "question": "Where is the user color generation function?",
+      "file_path": "codebase/src/backend/device_store.rs",
+      "function_name": "generate_user_color",
+      "line_number": 318
+    },
+    {
+      "id": 59,
+      "question": "How do I navigate to a specific page in the frontend?",
+      "file_path": "codebase/client/app.js",
+      "function_name": "navigateTo",
+      "line_number": 132
+    },
+    {
+      "id": 60,
+      "question": "Where is the frontend logout function?",
+      "file_path": "codebase/client/app.js",
+      "function_name": "logout",
+      "line_number": 156
+    },
+    {
+      "id": 61,
+      "question": "How do I initialize the frontend application?",
+      "file_path": "codebase/client/app.js",
+      "function_name": "initApp",
+      "line_number": 173
+    },
+    {
+      "id": 62,
+      "question": "Where is the WebSocket initialization in frontend?",
+      "file_path": "codebase/client/scripts/esp32_control.js",
+      "function_name": "initWebSocket",
+      "line_number": 61
+    },
+    {
+      "id": 63,
+      "question": "How do I handle WebSocket messages in frontend?",
+      "file_path": "codebase/client/scripts/esp32_control.js",
+      "function_name": "handleWebSocketMessage",
+      "line_number": 132
+    },
+    {
+      "id": 64,
+      "question": "Where is the device tab addition function?",
+      "file_path": "codebase/client/scripts/esp32_control.js",
+      "function_name": "addDeviceTab",
+      "line_number": 179
+    },
+    {
+      "id": 65,
+      "question": "How do I remove a device tab in the UI?",
+      "file_path": "codebase/client/scripts/esp32_control.js",
+      "function_name": "removeDeviceTab",
+      "line_number": 226
+    },
+    {
+      "id": 66,
+      "question": "Where is the device connection function in frontend?",
+      "file_path": "codebase/client/scripts/esp32_control.js",
+      "function_name": "connectDevice",
+      "line_number": 286
+    },
+    {
+      "id": 67,
+      "question": "How do I disconnect a device from the frontend?",
+      "file_path": "codebase/client/scripts/esp32_control.js",
+      "function_name": "disconnectDevice",
+      "line_number": 329
+    },
+    {
+      "id": 68,
+      "question": "Where is the device list update function?",
+      "file_path": "codebase/client/scripts/esp32_control.js",
+      "function_name": "updateDeviceList",
+      "line_number": 371
+    },
+    {
+      "id": 69,
+      "question": "How do I update device status indicators?",
+      "file_path": "codebase/client/scripts/esp32_control.js",
+      "function_name": "updateDeviceStatus",
+      "line_number": 455
+    },
+    {
+      "id": 70,
+      "question": "Where is the chart initialization function?",
+      "file_path": "codebase/client/scripts/esp32_control.js",
+      "function_name": "initializeChart",
+      "line_number": 501
+    },
+    {
+      "id": 71,
+      "question": "How do I update chart data in the frontend?",
+      "file_path": "codebase/client/scripts/esp32_control.js",
+      "function_name": "updateChartData",
+      "line_number": 572
+    },
+    {
+      "id": 72,
+      "question": "Where is the device event log update function?",
+      "file_path": "codebase/client/scripts/esp32_control.js",
+      "function_name": "updateEventLog",
+      "line_number": 652
+    },
+    {
+      "id": 73,
+      "question": "How do I send a stop command to ESP32?",
+      "file_path": "codebase/client/scripts/esp32_control.js",
+      "function_name": "sendStopOption",
+      "line_number": 1193
+    },
+    {
+      "id": 74,
+      "question": "Where is the application state initialization?",
+      "file_path": "codebase/src/backend/main.rs",
+      "function_name": "main",
+      "line_number": 125
+    },
+    {
+      "id": 75,
+      "question": "How do I create the application router?",
+      "file_path": "codebase/src/backend/main.rs",
+      "function_name": "create_app",
+      "line_number": 295
+    },
+    {
+      "id": 76,
+      "question": "Where is the login handler implemented?",
+      "file_path": "codebase/src/backend/main.rs",
+      "function_name": "login_handler",
+      "line_number": 592
+    },
+    {
+      "id": 77,
+      "question": "How do I handle user registration requests?",
+      "file_path": "codebase/src/backend/main.rs",
+      "function_name": "register_handler",
+      "line_number": 665
+    },
+    {
+      "id": 78,
+      "question": "Where is the logout handler?",
+      "file_path": "codebase/src/backend/main.rs",
+      "function_name": "logout_handler",
+      "line_number": 723
+    },
+    {
+      "id": 79,
+      "question": "How do I get the list of ESP32 devices via API?",
+      "file_path": "codebase/src/backend/main.rs",
+      "function_name": "get_devices_handler",
+      "line_number": 750
+    },
+    {
+      "id": 80,
+      "question": "Where is the device addition API handler?",
+      "file_path": "codebase/src/backend/main.rs",
+      "function_name": "add_device_handler",
+      "line_number": 795
+    },
+    {
+      "id": 81,
+      "question": "How do I remove a device via API?",
+      "file_path": "codebase/src/backend/main.rs",
+      "function_name": "remove_device_handler",
+      "line_number": 909
+    },
+    {
+      "id": 82,
+      "question": "Where is the device connection API handler?",
+      "file_path": "codebase/src/backend/main.rs",
+      "function_name": "connect_device_handler",
+      "line_number": 968
+    },
+    {
+      "id": 83,
+      "question": "How do I disconnect a device via API?",
+      "file_path": "codebase/src/backend/main.rs",
+      "function_name": "disconnect_device_handler",
+      "line_number": 1023
+    },
+    {
+      "id": 84,
+      "question": "Where is the command sending API handler?",
+      "file_path": "codebase/src/backend/main.rs",
+      "function_name": "send_command_handler",
+      "line_number": 1078
+    },
+    {
+      "id": 85,
+      "question": "How do I get device events via API?",
+      "file_path": "codebase/src/backend/main.rs",
+      "function_name": "get_events_handler",
+      "line_number": 1160
+    },
+    {
+      "id": 86,
+      "question": "Where is the UART connection API handler?",
+      "file_path": "codebase/src/backend/main.rs",
+      "function_name": "uart_connect_handler",
+      "line_number": 1227
+    },
+    {
+      "id": 87,
+      "question": "How do I disconnect UART via API?",
+      "file_path": "codebase/src/backend/main.rs",
+      "function_name": "uart_disconnect_handler",
+      "line_number": 1278
+    },
+    {
+      "id": 88,
+      "question": "Where is the UART port listing handler?",
+      "file_path": "codebase/src/backend/main.rs",
+      "function_name": "uart_list_ports_handler",
+      "line_number": 1326
+    },
+    {
+      "id": 89,
+      "question": "How do I get UART connection status?",
+      "file_path": "codebase/src/backend/main.rs",
+      "function_name": "uart_status_handler",
+      "line_number": 1358
+    },
+    {
+      "id": 90,
+      "question": "Where is the user management page handler?",
+      "file_path": "codebase/src/backend/main.rs",
+      "function_name": "users_page_handler",
+      "line_number": 1423
+    },
+    {
+      "id": 91,
+      "question": "How do I list all users via API?",
+      "file_path": "codebase/src/backend/main.rs",
+      "function_name": "list_users_handler",
+      "line_number": 1450
+    },
+    {
+      "id": 92,
+      "question": "Where is the user creation API handler?",
+      "file_path": "codebase/src/backend/main.rs",
+      "function_name": "create_user_handler",
+      "line_number": 1488
+    },
+    {
+      "id": 93,
+      "question": "How do I delete a user via API?",
+      "file_path": "codebase/src/backend/main.rs",
+      "function_name": "delete_user_handler",
+      "line_number": 1544
+    },
+    {
+      "id": 94,
+      "question": "Where is the password update handler?",
+      "file_path": "codebase/src/backend/main.rs",
+      "function_name": "update_password_handler",
+      "line_number": 1591
+    },
+    {
+      "id": 95,
+      "question": "How do I grant device permissions via API?",
+      "file_path": "codebase/src/backend/main.rs",
+      "function_name": "grant_permission_handler",
+      "line_number": 1647
+    },
+    {
+      "id": 96,
+      "question": "Where is the permission revocation handler?",
+      "file_path": "codebase/src/backend/main.rs",
+      "function_name": "revoke_permission_handler",
+      "line_number": 1698
+    },
+    {
+      "id": 97,
+      "question": "How do I get a user's accessible devices?",
+      "file_path": "codebase/src/backend/main.rs",
+      "function_name": "get_user_devices_handler",
+      "line_number": 1749
+    },
+    {
+      "id": 98,
+      "question": "Where is the connection status API handler?",
+      "file_path": "codebase/src/backend/main.rs",
+      "function_name": "connection_status_handler",
+      "line_number": 1195
+    },
+    {
+      "id": 99,
+      "question": "How do I get UART connection settings?",
+      "file_path": "codebase/src/backend/uart_connection.rs",
+      "function_name": "get_settings",
+      "line_number": 148
+    },
+    {
+      "id": 100,
+      "question": "Where is the ESP32 discovery service created with manager?",
+      "file_path": "codebase/src/backend/esp32_discovery.rs",
+      "function_name": "with_manager",
+      "line_number": 44,
+      "context": "Esp32Discovery::with_manager method"
+    }
+  ]
+}

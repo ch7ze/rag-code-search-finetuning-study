@@ -1,0 +1,67 @@
+<!-- ESP32 Control Page Content -->
+<div class="page-content">
+    <div class="esp32-container">
+        <!-- Loading State -->
+        <div id="loading-state" class="esp32-loading-state">
+            <div class="esp32-spinner" role="status">
+                <span class="sr-only">Loading ESP32 devices...</span>
+            </div>
+            <p>Connecting to ESP32 devices...</p>
+        </div>
+
+        <!-- No Devices State -->
+        <div id="no-devices-state" class="esp32-no-devices" style="display: none;">
+            <div class="esp32-info-box">
+                <h4>ℹ️ No ESP32 devices available</h4>
+                <p>No ESP32 devices are currently configured or connected.</p>
+                <button class="esp32-btn esp32-btn-primary" onclick="refreshDevices()">
+                    🔄 Refresh
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Layout with Sidebar -->
+        <div id="esp32-main-layout" class="esp32-main-layout" style="display: none;">
+            <!-- Sidebar Overlay (for mobile) -->
+            <div id="sidebar-overlay" class="sidebar-overlay" onclick="closeSidebar()"></div>
+
+            <!-- Mobile Sidebar Toggle Button -->
+            <button class="mobile-sidebar-toggle" onclick="toggleSidebar()">
+                ☰
+            </button>
+
+            <!-- ESP32 Device Sidebar -->
+            <div id="esp32-sidebar" class="esp32-sidebar">
+                <div class="sidebar-header">
+                    <h6>Available ESP32s</h6>
+                    <button class="btn-close-sidebar" onclick="closeSidebar()">×</button>
+                </div>
+                <div class="sidebar-content">
+                    <div id="available-devices-list">
+                        <!-- Dynamic device list will be inserted here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content Area -->
+            <div class="esp32-content-area">
+                <!-- Tab Layout (Desktop) -->
+                <div id="esp32-tabs" class="esp32-tabs">
+                    <ul class="esp32-nav-tabs" id="deviceTabs" role="tablist">
+                        <!-- Dynamic tabs will be inserted here -->
+                    </ul>
+                    <div class="esp32-tab-content" id="deviceTabContent">
+                        <!-- Dynamic tab content will be inserted here -->
+                    </div>
+                </div>
+
+                <!-- Stack Layout (Mobile) -->
+                <div id="esp32-stack" class="esp32-stack" style="display: none;">
+                    <!-- Dynamic stacked devices will be inserted here -->
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+

@@ -1,0 +1,72 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environment
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Project specific
+*.log
+.env
+
+# Modelle und Datenbanken
+# finetuned_model/ - COMMENTED OUT: We want to commit the fine-tuned adapters to Git
+chroma_db/
+# *.safetensors - COMMENTED OUT: Needed for LoRA adapters
+# *.bin - COMMENTED OUT: Needed for model files
+*.pth
+*.ckpt
+
+# Evaluationsergebnisse
+evaluation_results/
+
+# Trainingsdaten
+training_data.json
+
+# Rust Build-Artefakte (in allen codebase-Ordnern)
+**/target/
+Cargo.lock
+
+# Automatisch generierte Experiment-Ergebnisse
+model_comparison_*.json
+rq2_deletion_manifest.json
+top10_questions/
+
+# Generierte Function Summaries (werden automatisch erstellt)
+function_summaries.json

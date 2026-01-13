@@ -1,0 +1,43 @@
+# Rust build artifacts
+target/
+
+# Node.js dependencies
+node_modules/
+
+# Compiled JavaScript and source maps (if generated from TypeScript)
+#client/**/*.js
+#client/**/*.js.map
+dest/
+
+# Database files
+data/users.db
+*.db
+
+# Build/dist artifacts
+client-hash.json
+
+# Debug/test files
+cookies.txt
+cookies2.txt
+headers*.txt
+debug_cookies.html
+test_*.html
+
+# IDE files
+*.iml
+.idea/
+.vscode/
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+
+# PDF documentation (unless needed in repo)
+*.pdf
